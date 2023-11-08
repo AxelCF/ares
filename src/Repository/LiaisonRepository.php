@@ -21,28 +21,26 @@ class LiaisonRepository extends ServiceEntityRepository
         parent::__construct($registry, Liaison::class);
     }
 
-//    /**
-//     * @return Liaison[] Returns an array of Liaison objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Liaison[] Returns an array of Liaison objects
+    //     */
+    public function findAllLiaisonsSortedByName()
+    {
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.professor', 'p') // Assurez-vous que "professor" est le nom de la relation dans votre entité Liaison
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Liaison
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    //    public function findOneBySomeField($value): ?Liaison
+    //    {
+    //        return $this->createQueryBuilder('l')
+    //            ->andWhere('l.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

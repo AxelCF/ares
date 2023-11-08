@@ -15,6 +15,7 @@ class Liaison
 
     #[ORM\ManyToOne(inversedBy: 'liaisons')]
     #[ORM\JoinColumn(nullable: false)]
+    // #[ORM\OrderBy(['professor' => 'ASC'])]
     private ?Users $professor = null;
 
     #[ORM\ManyToOne(inversedBy: 'liaisons')]

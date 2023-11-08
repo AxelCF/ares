@@ -17,10 +17,13 @@ class LiaisonController extends AbstractController
     #[Route('/', name: 'app_liaison_index', methods: ['GET'])]
     public function index(LiaisonRepository $liaisonRepository): Response
     {
+        $liaisons = $liaisonRepository->findAllLiaisonsSortedByName(); // Utilisez une méthode personnalisée
+
         return $this->render('liaison/index.html.twig', [
-            'liaisons' => $liaisonRepository->findAll(),
+            'liaisons' => $liaisons,
         ]);
     }
+
 
     #[Route('/new', name: 'app_liaison_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -71,7 +74,7 @@ class LiaisonController extends AbstractController
     #[Route('/{id}', name: 'app_liaison_delete', methods: ['POST'])]
     public function delete(Request $request, Liaison $liaison, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$liaison->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $liaison->getId(), $request->request->get('_token'))) {
             $entityManager->remove($liaison);
             $entityManager->flush();
         }

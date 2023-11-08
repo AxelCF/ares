@@ -13,8 +13,7 @@ class LiaisonType extends AbstractType
     {
         $builder
             ->add('professor')
-            ->add('subject')
-        ;
+            ->add('subject');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
